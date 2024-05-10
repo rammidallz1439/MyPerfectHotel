@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
+    public static PoolManager Instance;
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
-
-    public static PoolManager Instance;
-    
     private void Awake()
     {
         Instance = this;
-    }
 
-    private void Start()
+    }
+    private void OnEnable()
     {
         CreatePoolObjects();
+    }   
+    private void Start()
+    {
+        
     }
     public void CreatePoolObjects()
     {
@@ -38,6 +40,7 @@ public class PoolManager : MonoBehaviour
 
         }
     }
+    
     public GameObject GetPooledObject(string tag)
     {
         GameObject obj;
@@ -52,9 +55,9 @@ public class PoolManager : MonoBehaviour
         }
         if (obj != null)
         {
-            
-            obj.SetActive(true);
            
+                obj.SetActive(true);
+            
             return obj;
         }
         else
@@ -73,7 +76,7 @@ public class PoolManager : MonoBehaviour
             return;
         }
         poolDictionary[tag].Enqueue(obj);
-        obj.SetActive(false);
+        obj.SetActive(true);
      
        
     }

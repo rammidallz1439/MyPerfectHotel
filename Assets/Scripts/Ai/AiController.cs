@@ -1,18 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vault;
 
-public class AiController : MonoBehaviour
+namespace Game
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AiController : AiHandler,IObserver
     {
-        
-    }
+        public void OnEnable()
+        {
+           
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void OnNotify()
+        {
+            manager  = Object.FindObjectOfType<GameManager>();
+           
+        }
+
+        public void OnRelease()
+        {
+        }
+
+        public void OnStart()
+        {
+            EventManager.Instance.TriggerEvent(new SpawnAiCharactersEvent());
+
+        }
+
+        public void RegisterListeners()
+        {
+            EventManager.Instance.AddListener<SpawnAiCharactersEvent>(SpawnCustomerHandler);
+            EventManager.Instance.AddListener<GoToRoomEvent>(CustomerToRoomEvent);
+            EventManager.Instance.AddListener<RoomFilledEvent>(RoomFilledeventHandler);
+            EventManager.Instance.AddListener<RoomEmptiedEvent>(RoomEmptiedEventHanler);
+            EventManager.Instance.AddListener<VacateRoomEvent>(VacateRoomEventHandler);
+            EventManager.Instance.AddListener<CustomerRequeuEvent>(OnCustomerRequeue);
+
+        }
+
+        public void RemoveListeners()
+        {
+            EventManager.Instance.RemoveListener<SpawnAiCharactersEvent>(SpawnCustomerHandler);
+            EventManager.Instance.RemoveListener<GoToRoomEvent>(CustomerToRoomEvent);
+            EventManager.Instance.RemoveListener<RoomFilledEvent>(RoomFilledeventHandler);
+            EventManager.Instance.RemoveListener<RoomEmptiedEvent>(RoomEmptiedEventHanler);
+            EventManager.Instance.RemoveListener<VacateRoomEvent>(VacateRoomEventHandler);
+            EventManager.Instance.AddListener<CustomerRequeuEvent>(OnCustomerRequeue);
+
+        }
     }
 }
+

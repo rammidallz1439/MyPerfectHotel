@@ -6,7 +6,10 @@ namespace Vault
 {
     public class GameConstants
     {
-        public const string jsonPath = "LevelData.json";
+        public const string MoneySaved = "MoneyEarned.json";
+        public const string CollectedMoneyCount = "CollectedMoney.json";
+        public const string RoomFilled = "RoomFilled.json";
+        public const string RoomCleanedCount = "RoomCleanedCount.json";
     }
 }
 

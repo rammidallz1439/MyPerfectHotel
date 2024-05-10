@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vault;
 
-public class AiManager : MonoBehaviour
+namespace Game
 {
-    // Start is called before the first frame update
-    void Start()
+    public class AiManager : MonoBehaviour
     {
-        
+        public Queue<Customer> Customers = new Queue<Customer>();
+        public Transform CustomerSpawnPoint;
+        public int SpawnCount;
+        public List<Room> Rooms;
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
